@@ -3,6 +3,7 @@ Intelligent Data Lake with Real-Time Analytics
 
 
 Phase 1: Cloud Infrastructure & Data Storage (Sprints 1-3)
+
 ----> Cloud Provider:
 1.Azure (50%): Azure Data Lake Storage (ADLS) Gen2
 2.Hybrid Option: AWS S3 (for additional storage redundancy)
@@ -18,6 +19,7 @@ Azure Bicep + Terraform (for flexible provisioning)
 
 
 Phase 2: Data Ingestion & Processing (Sprints 4-5)
+
 ----> Batch & Real-Time Data Ingestion:
 1.Azure Event Hubs (for real-time data ingestion)
 2.Apache Kafka (Self-hosted or Confluent Cloud) (for streaming & pub-sub architecture)
@@ -31,6 +33,7 @@ Phase 2: Data Ingestion & Processing (Sprints 4-5)
 
 
 Phase 3: DevOps & Automation (Sprints 6-7)
+
 ----> CI/CD Pipeline Tools:
 1.Azure DevOps Pipelines (for native Azure deployments)
 2.GitHub Actions (for Git-based automation)
