@@ -1,0 +1,107 @@
+{
+	"name": "TargetBalanced",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "avg_min_between_sent_txn",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "avg_min_between_received_txn",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "time_diff",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "sent_txn",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "received_txn",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "number_of_txn",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "max_value",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "avg_value_received",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "avg_value_sent",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "total_ether",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "total_ether_negative",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "erc20_total_sent",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "erc20_total_received",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "erc20_total_transacted",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "erc20_unique_sent",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "erc20_unique_received",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "flag",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "balanced"
+		}
+	}
+}

@@ -1,0 +1,266 @@
+{
+	"name": "Balanced_Data",
+	"properties": {
+		"activities": [
+			{
+				"name": "Balanced_DataT",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:45:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Avg min between sent tnx",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "avg_min_between_sent_txn",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Avg min between received tnx",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "avg_min_between_received_txn",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Time Diff between first and last (Mins)",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "time_diff",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Sent tnx",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sent_txn",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Received Tnx",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "received_txn",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Number of Created Contracts",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "number_of_txn",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "max value received ",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "max_value",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "avg val received",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "avg_value_received",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "avg val sent",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "avg_value_sent",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "total Ether sent",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_ether",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "total ether balance",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_ether_negative",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": " ERC20 total Ether received",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "erc20_total_sent",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": " ERC20 total ether sent",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "erc20_total_received",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": " ERC20 total Ether sent contract",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "erc20_total_transacted",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": " ERC20 uniq sent addr",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "erc20_unique_sent",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": " ERC20 uniq rec token name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "erc20_unique_received",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "FLAG",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "flag",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "BalancedData",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "TargetBalanced",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

@@ -1,0 +1,92 @@
+{
+	"name": "BalancedData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "balanced_data.csv",
+				"container": "batchdata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Avg min between sent tnx",
+				"type": "String"
+			},
+			{
+				"name": "Avg min between received tnx",
+				"type": "String"
+			},
+			{
+				"name": "Time Diff between first and last (Mins)",
+				"type": "String"
+			},
+			{
+				"name": "Sent tnx",
+				"type": "String"
+			},
+			{
+				"name": "Received Tnx",
+				"type": "String"
+			},
+			{
+				"name": "Number of Created Contracts",
+				"type": "String"
+			},
+			{
+				"name": "max value received ",
+				"type": "String"
+			},
+			{
+				"name": "avg val received",
+				"type": "String"
+			},
+			{
+				"name": "avg val sent",
+				"type": "String"
+			},
+			{
+				"name": "total Ether sent",
+				"type": "String"
+			},
+			{
+				"name": "total ether balance",
+				"type": "String"
+			},
+			{
+				"name": " ERC20 total Ether received",
+				"type": "String"
+			},
+			{
+				"name": " ERC20 total ether sent",
+				"type": "String"
+			},
+			{
+				"name": " ERC20 total Ether sent contract",
+				"type": "String"
+			},
+			{
+				"name": " ERC20 uniq sent addr",
+				"type": "String"
+			},
+			{
+				"name": " ERC20 uniq rec token name",
+				"type": "String"
+			},
+			{
+				"name": "FLAG",
+				"type": "String"
+			}
+		]
+	}
+}
