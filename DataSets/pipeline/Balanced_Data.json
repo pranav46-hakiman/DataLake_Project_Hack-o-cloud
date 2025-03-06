@@ -34,6 +34,212 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Avg min between sent tnx",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Avg_min_sent_tnx",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Avg min between received tnx",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Avg_min_received_tnx",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Time Diff between first and last (Mins)",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Time_Diff_first_and_last",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Sent tnx",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Sent_txs",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Received Tnx",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Received_Tnx",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Number of Created Contracts",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Number_of_Created_Contracts",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "max value received ",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "max_value_received",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "avg val received",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "avg_val_receiv",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "avg val sent",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "avg_val",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "total Ether sent",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_Ether",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "total ether balance",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_ether_balance",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": " ERC20 total Ether received",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ERC20_total_Ether_received",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": " ERC20 total ether sent",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ERC20_total_ether_sent",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": " ERC20 total Ether sent contract",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ERC20_total_Eether_sent_contract",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": " ERC20 uniq sent addr",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ERC20_uniq_sent_addr",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": " ERC20 uniq rec token name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ERC20_uniq_rec_token_name",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "FLAG",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FLAG",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
