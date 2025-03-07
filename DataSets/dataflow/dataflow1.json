@@ -1,0 +1,25 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "BalancedData"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "filter",
+					"description": "Sent_txs=0"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> BalancedData",
+				"BalancedData filter(ERROR_FUNCTION('')) ~> filter"
+			]
+		}
+	}
+}
