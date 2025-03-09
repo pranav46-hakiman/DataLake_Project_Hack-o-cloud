@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "FraudTable",
+						"referenceName": "TransformOnline",
 						"type": "DatasetReference"
 					},
 					"name": "FraudTransform"
@@ -16,22 +16,21 @@
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          step as integer,",
+				"          step as string,",
 				"          type as string,",
-				"          amount as decimal(18,2),",
+				"          amount as string,",
 				"          nameOrig as string,",
-				"          oldbalanceOrg as decimal(18,2),",
-				"          newbalanceOrg as decimal(18,2),",
+				"          oldbalanceOrg as string,",
+				"          newbalanceOrig as string,",
 				"          nameDest as string,",
-				"          oldbalanceDest as decimal(18,2),",
-				"          newbalanceDest as decimal(18,2),",
-				"          isFraud as boolean,",
-				"          isFlaggedFraud as boolean",
+				"          oldbalanceDest as string,",
+				"          newbalanceDest as string,",
+				"          isFraud as string,",
+				"          isFlaggedFraud as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> FraudTransform"
+				"     ignoreNoFilesFound: false) ~> FraudTransform"
 			]
 		}
 	}
