@@ -1,0 +1,68 @@
+{
+	"name": "TransformOnline",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TransformOnlineFraud",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "TargettOnlineFraud.csv",
+				"container": "targetdata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "step",
+				"type": "String"
+			},
+			{
+				"name": "type",
+				"type": "String"
+			},
+			{
+				"name": "amount",
+				"type": "String"
+			},
+			{
+				"name": "nameOrig",
+				"type": "String"
+			},
+			{
+				"name": "oldbalanceOrg",
+				"type": "String"
+			},
+			{
+				"name": "newbalanceOrig",
+				"type": "String"
+			},
+			{
+				"name": "nameDest",
+				"type": "String"
+			},
+			{
+				"name": "oldbalanceDest",
+				"type": "String"
+			},
+			{
+				"name": "newbalanceDest",
+				"type": "String"
+			},
+			{
+				"name": "isFraud",
+				"type": "String"
+			},
+			{
+				"name": "isFlaggedFraud",
+				"type": "String"
+			}
+		]
+	}
+}
