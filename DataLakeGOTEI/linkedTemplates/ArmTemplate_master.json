@@ -63,6 +63,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CreditCardd'"
 		},
+		"BalancedData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BalancedData'"
+		},
 		"SQLDB_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "datalake122.database.windows.net"
@@ -143,6 +147,9 @@
 					},
 					"CreditCardd_connectionString": {
 						"value": "[parameters('CreditCardd_connectionString')]"
+					},
+					"BalancedData_connectionString": {
+						"value": "[parameters('BalancedData_connectionString')]"
 					},
 					"SQLDB_properties_typeProperties_server": {
 						"value": "[parameters('SQLDB_properties_typeProperties_server')]"

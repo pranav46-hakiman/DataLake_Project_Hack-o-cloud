@@ -63,6 +63,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CreditCardd'"
 		},
+		"BalancedData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BalancedData'"
+		},
 		"SQLDB_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "datalake122.database.windows.net"
@@ -267,6 +271,19 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('CreditCardd_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BalancedData')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('BalancedData_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -662,97 +679,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/CreditCardd')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DBCreditCard')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLDB",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Transaction_ID",
-						"type": "varchar"
-					},
-					{
-						"name": "Date",
-						"type": "date"
-					},
-					{
-						"name": "Day_of_Week",
-						"type": "varchar"
-					},
-					{
-						"name": "Time",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Type_of_Card",
-						"type": "varchar"
-					},
-					{
-						"name": "Entry_Mode",
-						"type": "varchar"
-					},
-					{
-						"name": "Amount",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 2
-					},
-					{
-						"name": "Type_of_Transaction",
-						"type": "varchar"
-					},
-					{
-						"name": "Merchant",
-						"type": "varchar"
-					},
-					{
-						"name": "Country_of_Merchant",
-						"type": "varchar"
-					},
-					{
-						"name": "Shipping_Address",
-						"type": "varchar"
-					},
-					{
-						"name": "Country_of_Customer",
-						"type": "varchar"
-					},
-					{
-						"name": "Gender",
-						"type": "char"
-					},
-					{
-						"name": "Age",
-						"type": "decimal",
-						"precision": 5,
-						"scale": 2
-					},
-					{
-						"name": "Bank",
-						"type": "varchar"
-					},
-					{
-						"name": "Fraud",
-						"type": "bit"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CreditCard"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLDB')]"
 			]
 		}
 	]

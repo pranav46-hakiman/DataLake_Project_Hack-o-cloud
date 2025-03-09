@@ -47,6 +47,9 @@
 		"CreditCardd_connectionString": {
 			"value": ""
 		},
+		"BalancedData_connectionString": {
+			"value": ""
+		},
 		"SQLDB_properties_typeProperties_server": {
 			"value": "datalake122.database.windows.net"
 		},

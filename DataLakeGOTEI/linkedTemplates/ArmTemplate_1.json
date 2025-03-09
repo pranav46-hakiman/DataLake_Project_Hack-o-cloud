@@ -13,6 +13,307 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/DBCreditCard')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLDB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Transaction_ID",
+						"type": "varchar"
+					},
+					{
+						"name": "Date",
+						"type": "date"
+					},
+					{
+						"name": "Day_of_Week",
+						"type": "varchar"
+					},
+					{
+						"name": "Time",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Type_of_Card",
+						"type": "varchar"
+					},
+					{
+						"name": "Entry_Mode",
+						"type": "varchar"
+					},
+					{
+						"name": "Amount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Type_of_Transaction",
+						"type": "varchar"
+					},
+					{
+						"name": "Merchant",
+						"type": "varchar"
+					},
+					{
+						"name": "Country_of_Merchant",
+						"type": "varchar"
+					},
+					{
+						"name": "Shipping_Address",
+						"type": "varchar"
+					},
+					{
+						"name": "Country_of_Customer",
+						"type": "varchar"
+					},
+					{
+						"name": "Gender",
+						"type": "char"
+					},
+					{
+						"name": "Age",
+						"type": "decimal",
+						"precision": 5,
+						"scale": 2
+					},
+					{
+						"name": "Bank",
+						"type": "varchar"
+					},
+					{
+						"name": "Fraud",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CreditCard"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BalancedDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BalancedData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "TargetBalanced.csv",
+						"container": "targetdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Avg_min_between_sent_tnx",
+						"type": "String"
+					},
+					{
+						"name": "Avg_min_between_received_tnx",
+						"type": "String"
+					},
+					{
+						"name": "Time_Diff_between_first_and_last_(Mins)",
+						"type": "String"
+					},
+					{
+						"name": "Sent_Tnx",
+						"type": "String"
+					},
+					{
+						"name": "Received_Tnx",
+						"type": "String"
+					},
+					{
+						"name": "Number_of_Created_Contracts",
+						"type": "String"
+					},
+					{
+						"name": "max_value_received ",
+						"type": "String"
+					},
+					{
+						"name": "avg_val_received",
+						"type": "String"
+					},
+					{
+						"name": "avg_val_sent",
+						"type": "String"
+					},
+					{
+						"name": "total_Ether_sent",
+						"type": "String"
+					},
+					{
+						"name": "total_ether_balance",
+						"type": "String"
+					},
+					{
+						"name": " ERC20_total_Ether_received",
+						"type": "String"
+					},
+					{
+						"name": " ERC20_total_ether_sent",
+						"type": "String"
+					},
+					{
+						"name": " ERC20_total_Ether_sent_contract",
+						"type": "String"
+					},
+					{
+						"name": " ERC20_uniq_sent_addr",
+						"type": "String"
+					},
+					{
+						"name": " ERC20_uniq_rec_token_name",
+						"type": "String"
+					},
+					{
+						"name": "FLAG",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DBBalanced')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLDB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Avg_min_between_sent_tnx",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Avg_min_between_received_tnx",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Time_Diff",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Sent_Tnx",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Received_Tnx",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Number_Contracts",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Max_Value",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 6
+					},
+					{
+						"name": "Avg_Val_Received",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 6
+					},
+					{
+						"name": "Avg_Val_Sent",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 6
+					},
+					{
+						"name": "Total_Ether",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 6
+					},
+					{
+						"name": "total_ether_balance",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 6
+					},
+					{
+						"name": "ERC20_total_Ether_received",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 6
+					},
+					{
+						"name": "ERC20_to_2",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 6
+					},
+					{
+						"name": "ERC20_to_3",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 6
+					},
+					{
+						"name": "ERC20_un",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 6
+					},
+					{
+						"name": "ERC20_un_2",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 6
+					},
+					{
+						"name": "FLAG",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TransactionsAnalytics"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/OnlineFraudSource')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -183,7 +484,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CreditCradSource')]",
+			"name": "[concat(parameters('factoryName'), '/CreditCardSource')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -211,9 +512,9 @@
 					"scriptLines": [
 						"source(output(",
 						"          Transaction_ID as string,",
-						"          Date as date,",
+						"          Date as string,",
 						"          Day_of_Week as string,",
-						"          Time as integer,",
+						"          Time as short,",
 						"          Type_of_Card as string,",
 						"          Entry_Mode as string,",
 						"          Amount as string,",
@@ -225,7 +526,7 @@
 						"          Gender as string,",
 						"          Age as double,",
 						"          Bank as string,",
-						"          Fraud as integer",
+						"          Fraud as boolean",
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
@@ -266,16 +567,128 @@
 						"          Time,",
 						"          Type_of_Card,",
 						"          Entry_Mode,",
+						"          Amount,",
 						"          Type_of_Transaction,",
+						"          Merchant = Merchant_Group,",
+						"          Country_of_Merchant = Country_of_Transaction,",
 						"          Shipping_Address,",
+						"          Country_of_Customer = Country_of_Residence,",
 						"          Gender,",
 						"          Age,",
-						"          Bank",
+						"          Bank,",
+						"          Fraud",
 						"     )) ~> DBCreditCard"
 					]
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DBCreditCard')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BalancedSource')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "BalancedDS",
+								"type": "DatasetReference"
+							},
+							"name": "BalancedDF"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DBBalanced",
+								"type": "DatasetReference"
+							},
+							"name": "BalancedTable"
+						}
+					],
+					"transformations": [],
+					"scriptLines": [
+						"source(output(",
+						"          Avg_min_between_sent_tnx as decimal(10,0),",
+						"          Avg_min_between_received_tnx as decimal(10,0),",
+						"          {Time_Diff_between_first_and_last_(Mins)} as decimal(10,0),",
+						"          Sent_Tnx as integer,",
+						"          Received_Tnx as integer,",
+						"          Number_of_Created_Contracts as integer,",
+						"          {max_value_received } as decimal(10,0),",
+						"          avg_val_received as decimal(10,0),",
+						"          avg_val_sent as decimal(10,0),",
+						"          total_Ether_sent as decimal(10,0),",
+						"          total_ether_balance as decimal(10,0),",
+						"          { ERC20_total_Ether_received} as decimal(10,0),",
+						"          { ERC20_total_ether_sent} as decimal(10,0),",
+						"          { ERC20_total_Ether_sent_contract} as decimal(10,0),",
+						"          { ERC20_uniq_sent_addr} as decimal(10,0),",
+						"          { ERC20_uniq_rec_token_name} as decimal(10,0),",
+						"          FLAG as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     inferDriftedColumnTypes: true,",
+						"     ignoreNoFilesFound: false) ~> BalancedDF",
+						"BalancedDF sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          Avg_min_between_sent_tnx as decimal(18,2),",
+						"          Avg_min_between_received_tnx as decimal(18,2),",
+						"          Time_Diff as decimal(18,2),",
+						"          Sent_Tnx as integer,",
+						"          Received_Tnx as integer,",
+						"          Number_Contracts as integer,",
+						"          Max_Value as decimal(18,6),",
+						"          Avg_Val_Received as decimal(18,6),",
+						"          Avg_Val_Sent as decimal(18,6),",
+						"          Total_Ether as decimal(18,6),",
+						"          total_ether_balance as decimal(18,6),",
+						"          ERC20_total_Ether_received as decimal(18,6),",
+						"          ERC20_to_2 as decimal(18,6),",
+						"          ERC20_to_3 as decimal(18,6),",
+						"          ERC20_un as decimal(18,6),",
+						"          ERC20_un_2 as decimal(18,6),",
+						"          FLAG as boolean",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          Avg_min_between_sent_tnx,",
+						"          Avg_min_between_received_tnx,",
+						"          Sent_Tnx,",
+						"          Received_Tnx,",
+						"          Number_Contracts = Number_of_Created_Contracts,",
+						"          Max_Value = avg_val_received,",
+						"          Avg_Val_Received = avg_val_received,",
+						"          Avg_Val_Sent = avg_val_sent,",
+						"          Total_Ether = total_Ether_sent,",
+						"          total_ether_balance,",
+						"          ERC20_total_Ether_received = { ERC20_total_Ether_received},",
+						"          ERC20_to_2 = { ERC20_total_ether_sent},",
+						"          ERC20_to_3 = { ERC20_total_Ether_sent_contract},",
+						"          ERC20_un = { ERC20_uniq_sent_addr},",
+						"          ERC20_un_2 = { ERC20_uniq_rec_token_name},",
+						"          FLAG",
+						"     )) ~> BalancedTable"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/BalancedDS')]",
+				"[concat(variables('factoryId'), '/datasets/DBBalanced')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/BlobToSQLDataFlow')]",
@@ -413,6 +826,98 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/PaysimSource')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BlobtoSQLDBCreditCard')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CredtCardDataFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "CreditCardSource",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"CreditcardDF": {},
+									"DBCreditCard": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/CreditCardSource')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BlobtoSQLBalanced')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "BalancedDataFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.00:45:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "BalancedSource",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"BalancedDF": {},
+									"BalancedTable": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/BalancedSource')]"
 			]
 		}
 	]
