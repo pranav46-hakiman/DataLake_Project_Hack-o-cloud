@@ -1,0 +1,72 @@
+{
+	"name": "DBOnlineFraud",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "step",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "type",
+				"type": "varchar"
+			},
+			{
+				"name": "amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "nameOrig",
+				"type": "varchar"
+			},
+			{
+				"name": "oldbalanceOrg",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "newbalanceOrg",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "nameDest",
+				"type": "varchar"
+			},
+			{
+				"name": "oldbalanceDest",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "newbalanceDest",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "isFraud",
+				"type": "bit"
+			},
+			{
+				"name": "isFlaggedFraud",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "OnlineFraud"
+		}
+	}
+}
