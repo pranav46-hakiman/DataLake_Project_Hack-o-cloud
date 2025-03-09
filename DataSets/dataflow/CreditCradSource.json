@@ -12,11 +12,19 @@
 					"name": "CreditcardDF"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DBCreditCard",
+						"type": "DatasetReference"
+					},
+					"name": "DBCreditCard"
+				}
+			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          Transaction_ID as integer,",
+				"          Transaction_ID as string,",
 				"          Date as date,",
 				"          Day_of_Week as string,",
 				"          Time as integer,",
@@ -36,7 +44,48 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> CreditcardDF"
+				"     ignoreNoFilesFound: false) ~> CreditcardDF",
+				"CreditcardDF sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Transaction_ID as string,",
+				"          Date as date,",
+				"          Day_of_Week as string,",
+				"          Time as integer,",
+				"          Type_of_Card as string,",
+				"          Entry_Mode as string,",
+				"          Amount as decimal(18,2),",
+				"          Type_of_Transaction as string,",
+				"          Merchant as string,",
+				"          Country_of_Merchant as string,",
+				"          Shipping_Address as string,",
+				"          Country_of_Customer as string,",
+				"          Gender as string,",
+				"          Age as decimal(5,2),",
+				"          Bank as string,",
+				"          Fraud as boolean",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Transaction_ID,",
+				"          Date,",
+				"          Day_of_Week,",
+				"          Time,",
+				"          Type_of_Card,",
+				"          Entry_Mode,",
+				"          Type_of_Transaction,",
+				"          Shipping_Address,",
+				"          Gender,",
+				"          Age,",
+				"          Bank",
+				"     )) ~> DBCreditCard"
 			]
 		}
 	}
