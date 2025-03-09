@@ -1,0 +1,81 @@
+{
+	"name": "BalancedSource",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "BalancedDS",
+						"type": "DatasetReference"
+					},
+					"name": "BalancedDF"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DBBalanced",
+						"type": "DatasetReference"
+					},
+					"name": "BalancedTable"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          Avg_min_between_sent_tnx as decimal(10,0),",
+				"          Avg_min_between_received_tnx as decimal(10,0),",
+				"          {Time_Diff_between_first_and_last_(Mins)} as decimal(10,0),",
+				"          Sent_Tnx as integer,",
+				"          Received_Tnx as integer,",
+				"          Number_of_Created_Contracts as integer,",
+				"          {max_value_received } as string,",
+				"          avg_val_received as string,",
+				"          avg_val_sent as string,",
+				"          total_Ether_sent as string,",
+				"          total_ether_balance as string,",
+				"          { ERC20_total_Ether_received} as string,",
+				"          { ERC20_total_ether_sent} as string,",
+				"          { ERC20_total_Ether_sent_contract} as string,",
+				"          { ERC20_uniq_sent_addr} as string,",
+				"          { ERC20_uniq_rec_token_name} as string,",
+				"          FLAG as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> BalancedDF",
+				"BalancedDF sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Avg_min_between_sent_tnx as decimal(18,2),",
+				"          Avg_min_between_received_tnx as decimal(18,2),",
+				"          Time_Diff as decimal(18,2),",
+				"          Sent_Tnx as integer,",
+				"          Received_Tnx as integer,",
+				"          Number_Contracts as integer,",
+				"          Max_Value as decimal(18,6),",
+				"          Avg_Val_Received as decimal(18,6),",
+				"          Avg_Val_Sent as decimal(18,6),",
+				"          Total_Ether as decimal(18,6),",
+				"          total_ether_balance as decimal(18,6),",
+				"          ERC20_total_Ether_received as decimal(18,6),",
+				"          ERC20_to_2 as decimal(18,6),",
+				"          ERC20_to_3 as decimal(18,6),",
+				"          ERC20_un as decimal(18,6),",
+				"          ERC20_un_2 as decimal(18,6),",
+				"          FLAG as boolean",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> BalancedTable"
+			]
+		}
+	}
+}

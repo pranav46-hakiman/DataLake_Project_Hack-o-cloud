@@ -1,0 +1,114 @@
+{
+	"name": "DBBalanced",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Avg_min_between_sent_tnx",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Avg_min_between_received_tnx",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Time_Diff",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Sent_Tnx",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Received_Tnx",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Number_Contracts",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Max_Value",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "Avg_Val_Received",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "Avg_Val_Sent",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "Total_Ether",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "total_ether_balance",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "ERC20_total_Ether_received",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "ERC20_to_2",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "ERC20_to_3",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "ERC20_un",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "ERC20_un_2",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "FLAG",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TransactionsAnalytics"
+		}
+	}
+}
