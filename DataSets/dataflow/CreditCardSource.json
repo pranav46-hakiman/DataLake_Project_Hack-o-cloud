@@ -1,5 +1,5 @@
 {
-	"name": "CreditCradSource",
+	"name": "CreditCardSource",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -23,7 +23,25 @@
 			],
 			"transformations": [],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          Transaction_ID as string,",
+				"          Date as string,",
+				"          Day_of_Week as string,",
+				"          Time as short,",
+				"          Type_of_Card as string,",
+				"          Entry_Mode as string,",
+				"          Amount as string,",
+				"          Type_of_Transaction as string,",
+				"          Merchant_Group as string,",
+				"          Country_of_Transaction as string,",
+				"          Shipping_Address as string,",
+				"          Country_of_Residence as string,",
+				"          Gender as string,",
+				"          Age as double,",
+				"          Bank as string,",
+				"          Fraud as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> CreditcardDF",
