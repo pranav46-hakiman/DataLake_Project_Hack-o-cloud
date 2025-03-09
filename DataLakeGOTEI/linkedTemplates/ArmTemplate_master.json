@@ -55,6 +55,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'OnlineFraud'"
 		},
+		"Paysimm_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Paysimm'"
+		},
 		"SQLDB_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "datalake122.database.windows.net"
@@ -130,6 +134,9 @@
 					"OnlineFraud_connectionString": {
 						"value": "[parameters('OnlineFraud_connectionString')]"
 					},
+					"Paysimm_connectionString": {
+						"value": "[parameters('Paysimm_connectionString')]"
+					},
 					"SQLDB_properties_typeProperties_server": {
 						"value": "[parameters('SQLDB_properties_typeProperties_server')]"
 					},
@@ -142,6 +149,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "DataLakeGOTEI_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DataLakeGOTEI_ArmTemplate_0')]"
+			]
 		}
 	]
 }

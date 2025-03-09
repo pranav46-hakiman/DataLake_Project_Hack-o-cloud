@@ -41,6 +41,9 @@
 		"OnlineFraud_connectionString": {
 			"value": ""
 		},
+		"Paysimm_connectionString": {
+			"value": ""
+		},
 		"SQLDB_properties_typeProperties_server": {
 			"value": "datalake122.database.windows.net"
 		},

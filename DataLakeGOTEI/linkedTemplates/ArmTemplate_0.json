@@ -55,6 +55,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'OnlineFraud'"
 		},
+		"Paysimm_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Paysimm'"
+		},
 		"SQLDB_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "datalake122.database.windows.net"
@@ -238,6 +242,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Paysimm')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('Paysimm_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/OnlineFraudDS')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -388,6 +405,156 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PaysimDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Paysimm",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "TargetPaySim.csv",
+						"container": "targetdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "step",
+						"type": "String"
+					},
+					{
+						"name": "type",
+						"type": "String"
+					},
+					{
+						"name": "amount",
+						"type": "String"
+					},
+					{
+						"name": "nameOrig",
+						"type": "String"
+					},
+					{
+						"name": "oldbalanceOrg",
+						"type": "String"
+					},
+					{
+						"name": "newbalanceOrig",
+						"type": "String"
+					},
+					{
+						"name": "nameDest",
+						"type": "String"
+					},
+					{
+						"name": "oldbalanceDest",
+						"type": "String"
+					},
+					{
+						"name": "newbalanceDest",
+						"type": "String"
+					},
+					{
+						"name": "isFraud",
+						"type": "String"
+					},
+					{
+						"name": "isFlaggedFraud",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Paysimm')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DBPaysim')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLDB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "step",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "type",
+						"type": "varchar"
+					},
+					{
+						"name": "amount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "nameOrig",
+						"type": "varchar"
+					},
+					{
+						"name": "oldbalanceOrg",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "newbalanceOrg",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "nameDest",
+						"type": "varchar"
+					},
+					{
+						"name": "oldbalanceDest",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "newbalanceDest",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "isFraud",
+						"type": "bit"
+					},
+					{
+						"name": "isFlaggedFraud",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Paysim"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLDB')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/OnlineFraudSource')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -476,6 +643,94 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PaysimSource')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "PaysimDS",
+								"type": "DatasetReference"
+							},
+							"name": "PaysimSourceData"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DBPaysim",
+								"type": "DatasetReference"
+							},
+							"name": "PaysimTable"
+						}
+					],
+					"transformations": [],
+					"scriptLines": [
+						"source(output(",
+						"          step as string,",
+						"          type as string,",
+						"          amount as string,",
+						"          nameOrig as string,",
+						"          oldbalanceOrg as string,",
+						"          newbalanceOrig as string,",
+						"          nameDest as string,",
+						"          oldbalanceDest as string,",
+						"          newbalanceDest as string,",
+						"          isFraud as string,",
+						"          isFlaggedFraud as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     inferDriftedColumnTypes: true,",
+						"     ignoreNoFilesFound: false) ~> PaysimSourceData",
+						"PaysimSourceData sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          step as integer,",
+						"          type as string,",
+						"          amount as decimal(18,2),",
+						"          nameOrig as string,",
+						"          oldbalanceOrg as decimal(18,2),",
+						"          newbalanceOrg as decimal(18,2),",
+						"          nameDest as string,",
+						"          oldbalanceDest as decimal(18,2),",
+						"          newbalanceDest as decimal(18,2),",
+						"          isFraud as boolean,",
+						"          isFlaggedFraud as boolean",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          step,",
+						"          type,",
+						"          amount,",
+						"          nameOrig,",
+						"          oldbalanceOrg,",
+						"          newbalanceOrg = newbalanceOrig,",
+						"          nameDest,",
+						"          oldbalanceDest,",
+						"          newbalanceDest,",
+						"          isFraud,",
+						"          isFlaggedFraud",
+						"     )) ~> PaysimTable"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/PaysimDS')]",
+				"[concat(variables('factoryId'), '/datasets/DBPaysim')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BlobToSQLDataFlow')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -483,52 +738,6 @@
 				"activities": [
 					{
 						"name": "FraudDataFlow",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.00:45:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "OnlineFraudSource",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"OnlineFraudBlobSource": {},
-									"FrauTable": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/OnlineFraudSource')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BlobtoSQLDBOnlineFraud')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "DF1OnlineFraud",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
