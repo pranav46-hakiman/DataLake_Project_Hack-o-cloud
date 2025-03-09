@@ -1,0 +1,60 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "DataLakeGOTEI"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"BalancedBlob_connectionString": {
+			"value": ""
+		},
+		"CreditCard_connectionString": {
+			"value": ""
+		},
+		"CreditCardTarget_connectionString": {
+			"value": ""
+		},
+		"OnlineData_connectionString": {
+			"value": ""
+		},
+		"Paysim_connectionString": {
+			"value": ""
+		},
+		"TargetBalanced_connectionString": {
+			"value": ""
+		},
+		"TargetOnlineData_connectionString": {
+			"value": ""
+		},
+		"TargetPaysim_connectionString": {
+			"value": ""
+		},
+		"TransformOnlineFraud_connectionString": {
+			"value": ""
+		},
+		"SQLDB_password": {
+			"value": ""
+		},
+		"OnlineFraud_connectionString": {
+			"value": ""
+		},
+		"SQLDB_properties_typeProperties_server": {
+			"value": "datalake122.database.windows.net"
+		},
+		"SQLDB_properties_typeProperties_database": {
+			"value": "ADFDataTransform"
+		},
+		"SQLDB_properties_typeProperties_userName": {
+			"value": "GOTEI"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

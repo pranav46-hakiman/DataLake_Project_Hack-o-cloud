@@ -1,0 +1,147 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DataLakeGOTEI"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"BalancedBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BalancedBlob'"
+		},
+		"CreditCard_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CreditCard'"
+		},
+		"CreditCardTarget_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CreditCardTarget'"
+		},
+		"OnlineData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OnlineData'"
+		},
+		"Paysim_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Paysim'"
+		},
+		"TargetBalanced_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TargetBalanced'"
+		},
+		"TargetOnlineData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TargetOnlineData'"
+		},
+		"TargetPaysim_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TargetPaysim'"
+		},
+		"TransformOnlineFraud_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TransformOnlineFraud'"
+		},
+		"SQLDB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SQLDB'"
+		},
+		"OnlineFraud_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OnlineFraud'"
+		},
+		"SQLDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "datalake122.database.windows.net"
+		},
+		"SQLDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "ADFDataTransform"
+		},
+		"SQLDB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "GOTEI"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "DataLakeGOTEI_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"BalancedBlob_connectionString": {
+						"value": "[parameters('BalancedBlob_connectionString')]"
+					},
+					"CreditCard_connectionString": {
+						"value": "[parameters('CreditCard_connectionString')]"
+					},
+					"CreditCardTarget_connectionString": {
+						"value": "[parameters('CreditCardTarget_connectionString')]"
+					},
+					"OnlineData_connectionString": {
+						"value": "[parameters('OnlineData_connectionString')]"
+					},
+					"Paysim_connectionString": {
+						"value": "[parameters('Paysim_connectionString')]"
+					},
+					"TargetBalanced_connectionString": {
+						"value": "[parameters('TargetBalanced_connectionString')]"
+					},
+					"TargetOnlineData_connectionString": {
+						"value": "[parameters('TargetOnlineData_connectionString')]"
+					},
+					"TargetPaysim_connectionString": {
+						"value": "[parameters('TargetPaysim_connectionString')]"
+					},
+					"TransformOnlineFraud_connectionString": {
+						"value": "[parameters('TransformOnlineFraud_connectionString')]"
+					},
+					"SQLDB_password": {
+						"value": "[parameters('SQLDB_password')]"
+					},
+					"OnlineFraud_connectionString": {
+						"value": "[parameters('OnlineFraud_connectionString')]"
+					},
+					"SQLDB_properties_typeProperties_server": {
+						"value": "[parameters('SQLDB_properties_typeProperties_server')]"
+					},
+					"SQLDB_properties_typeProperties_database": {
+						"value": "[parameters('SQLDB_properties_typeProperties_database')]"
+					},
+					"SQLDB_properties_typeProperties_userName": {
+						"value": "[parameters('SQLDB_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
