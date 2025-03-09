@@ -74,7 +74,25 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> BalancedTable"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Avg_min_between_sent_tnx,",
+				"          Avg_min_between_received_tnx,",
+				"          Sent_Tnx,",
+				"          Received_Tnx,",
+				"          Number_Contracts = Number_of_Created_Contracts,",
+				"          Max_Value = avg_val_received,",
+				"          Avg_Val_Received = avg_val_received,",
+				"          Avg_Val_Sent = avg_val_sent,",
+				"          Total_Ether = total_Ether_sent,",
+				"          total_ether_balance,",
+				"          ERC20_total_Ether_received = { ERC20_total_Ether_received},",
+				"          ERC20_to_2 = { ERC20_total_ether_sent},",
+				"          ERC20_to_3 = { ERC20_total_Ether_sent_contract},",
+				"          ERC20_un = { ERC20_uniq_sent_addr},",
+				"          ERC20_un_2 = { ERC20_uniq_rec_token_name},",
+				"          FLAG",
+				"     )) ~> BalancedTable"
 			]
 		}
 	}
