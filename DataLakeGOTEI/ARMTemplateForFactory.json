@@ -520,6 +520,52 @@
 				"[concat(variables('factoryId'), '/datasets/OnlineFraudDS')]",
 				"[concat(variables('factoryId'), '/datasets/DBOnlineFraud')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BlobtoSQLDBOnlineFraud')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DF1OnlineFraud",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.00:45:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "OnlineFraudSource",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"OnlineFraudBlobSource": {},
+									"FrauTable": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/OnlineFraudSource')]"
+			]
 		}
 	]
 }
