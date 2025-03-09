@@ -59,6 +59,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Paysimm'"
 		},
+		"CreditCardd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CreditCardd'"
+		},
 		"SQLDB_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "datalake122.database.windows.net"
@@ -136,6 +140,9 @@
 					},
 					"Paysimm_connectionString": {
 						"value": "[parameters('Paysimm_connectionString')]"
+					},
+					"CreditCardd_connectionString": {
+						"value": "[parameters('CreditCardd_connectionString')]"
 					},
 					"SQLDB_properties_typeProperties_server": {
 						"value": "[parameters('SQLDB_properties_typeProperties_server')]"

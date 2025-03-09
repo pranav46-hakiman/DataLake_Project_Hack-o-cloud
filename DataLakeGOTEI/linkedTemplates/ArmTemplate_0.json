@@ -59,6 +59,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Paysimm'"
 		},
+		"CreditCardd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CreditCardd'"
+		},
 		"SQLDB_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "datalake122.database.windows.net"
@@ -250,6 +254,19 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('Paysimm_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CreditCardd')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('CreditCardd_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -555,225 +572,187 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/OnlineFraudSource')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
+			"name": "[concat(parameters('factoryName'), '/CreditCardDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"type": "MappingDataFlow",
+				"linkedServiceName": {
+					"referenceName": "CreditCardd",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
 				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "OnlineFraudDS",
-								"type": "DatasetReference"
-							},
-							"name": "OnlineFraudBlobSource"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "DBOnlineFraud",
-								"type": "DatasetReference"
-							},
-							"name": "FrauTable"
-						}
-					],
-					"transformations": [],
-					"scriptLines": [
-						"source(output(",
-						"          step as string,",
-						"          type as string,",
-						"          amount as string,",
-						"          nameOrig as string,",
-						"          oldbalanceOrg as string,",
-						"          newbalanceOrig as string,",
-						"          nameDest as string,",
-						"          oldbalanceDest as string,",
-						"          newbalanceDest as string,",
-						"          isFraud as string,",
-						"          isFlaggedFraud as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     inferDriftedColumnTypes: true,",
-						"     ignoreNoFilesFound: false) ~> OnlineFraudBlobSource",
-						"OnlineFraudBlobSource sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     input(",
-						"          step as integer,",
-						"          type as string,",
-						"          amount as decimal(18,2),",
-						"          nameOrig as string,",
-						"          oldbalanceOrg as decimal(18,2),",
-						"          newbalanceOrg as decimal(18,2),",
-						"          nameDest as string,",
-						"          oldbalanceDest as decimal(18,2),",
-						"          newbalanceDest as decimal(18,2),",
-						"          isFraud as boolean,",
-						"          isFlaggedFraud as boolean",
-						"     ),",
-						"     deletable:false,",
-						"     insertable:true,",
-						"     updateable:false,",
-						"     upsertable:false,",
-						"     format: 'table',",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError',",
-						"     mapColumn(",
-						"          step,",
-						"          type,",
-						"          amount,",
-						"          nameOrig,",
-						"          oldbalanceOrg,",
-						"          newbalanceOrg = newbalanceOrig,",
-						"          nameDest,",
-						"          oldbalanceDest,",
-						"          newbalanceDest,",
-						"          isFraud,",
-						"          isFlaggedFraud",
-						"     )) ~> FrauTable"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/OnlineFraudDS')]",
-				"[concat(variables('factoryId'), '/datasets/DBOnlineFraud')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PaysimSource')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "PaysimDS",
-								"type": "DatasetReference"
-							},
-							"name": "PaysimSourceData"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "DBPaysim",
-								"type": "DatasetReference"
-							},
-							"name": "PaysimTable"
-						}
-					],
-					"transformations": [],
-					"scriptLines": [
-						"source(output(",
-						"          step as string,",
-						"          type as string,",
-						"          amount as string,",
-						"          nameOrig as string,",
-						"          oldbalanceOrg as string,",
-						"          newbalanceOrig as string,",
-						"          nameDest as string,",
-						"          oldbalanceDest as string,",
-						"          newbalanceDest as string,",
-						"          isFraud as string,",
-						"          isFlaggedFraud as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     inferDriftedColumnTypes: true,",
-						"     ignoreNoFilesFound: false) ~> PaysimSourceData",
-						"PaysimSourceData sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     input(",
-						"          step as integer,",
-						"          type as string,",
-						"          amount as decimal(18,2),",
-						"          nameOrig as string,",
-						"          oldbalanceOrg as decimal(18,2),",
-						"          newbalanceOrg as decimal(18,2),",
-						"          nameDest as string,",
-						"          oldbalanceDest as decimal(18,2),",
-						"          newbalanceDest as decimal(18,2),",
-						"          isFraud as boolean,",
-						"          isFlaggedFraud as boolean",
-						"     ),",
-						"     deletable:false,",
-						"     insertable:true,",
-						"     updateable:false,",
-						"     upsertable:false,",
-						"     format: 'table',",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError',",
-						"     mapColumn(",
-						"          step,",
-						"          type,",
-						"          amount,",
-						"          nameOrig,",
-						"          oldbalanceOrg,",
-						"          newbalanceOrg = newbalanceOrig,",
-						"          nameDest,",
-						"          oldbalanceDest,",
-						"          newbalanceDest,",
-						"          isFraud,",
-						"          isFlaggedFraud",
-						"     )) ~> PaysimTable"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/PaysimDS')]",
-				"[concat(variables('factoryId'), '/datasets/DBPaysim')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BlobToSQLDataFlow')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "TargetCreditCard.csv",
+						"container": "targetdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
 					{
-						"name": "FraudDataFlow",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.00:45:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "OnlineFraudSource",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"OnlineFraudBlobSource": {},
-									"FrauTable": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
+						"name": "Transaction_ID",
+						"type": "String"
+					},
+					{
+						"name": "Date",
+						"type": "String"
+					},
+					{
+						"name": "Day_of_Week",
+						"type": "String"
+					},
+					{
+						"name": "Time",
+						"type": "String"
+					},
+					{
+						"name": "Type_of_Card",
+						"type": "String"
+					},
+					{
+						"name": "Entry_Mode",
+						"type": "String"
+					},
+					{
+						"name": "Amount",
+						"type": "String"
+					},
+					{
+						"name": "Type_of_Transaction",
+						"type": "String"
+					},
+					{
+						"name": "Merchant_Group",
+						"type": "String"
+					},
+					{
+						"name": "Country_of_Transaction",
+						"type": "String"
+					},
+					{
+						"name": "Shipping_Address",
+						"type": "String"
+					},
+					{
+						"name": "Country_of_Residence",
+						"type": "String"
+					},
+					{
+						"name": "Gender",
+						"type": "String"
+					},
+					{
+						"name": "Age",
+						"type": "String"
+					},
+					{
+						"name": "Bank",
+						"type": "String"
+					},
+					{
+						"name": "Fraud",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/CreditCardd')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DBCreditCard')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLDB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Transaction_ID",
+						"type": "varchar"
+					},
+					{
+						"name": "Date",
+						"type": "date"
+					},
+					{
+						"name": "Day_of_Week",
+						"type": "varchar"
+					},
+					{
+						"name": "Time",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Type_of_Card",
+						"type": "varchar"
+					},
+					{
+						"name": "Entry_Mode",
+						"type": "varchar"
+					},
+					{
+						"name": "Amount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Type_of_Transaction",
+						"type": "varchar"
+					},
+					{
+						"name": "Merchant",
+						"type": "varchar"
+					},
+					{
+						"name": "Country_of_Merchant",
+						"type": "varchar"
+					},
+					{
+						"name": "Shipping_Address",
+						"type": "varchar"
+					},
+					{
+						"name": "Country_of_Customer",
+						"type": "varchar"
+					},
+					{
+						"name": "Gender",
+						"type": "char"
+					},
+					{
+						"name": "Age",
+						"type": "decimal",
+						"precision": 5,
+						"scale": 2
+					},
+					{
+						"name": "Bank",
+						"type": "varchar"
+					},
+					{
+						"name": "Fraud",
+						"type": "bit"
 					}
 				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CreditCard"
+				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/OnlineFraudSource')]"
+				"[concat(variables('factoryId'), '/linkedServices/SQLDB')]"
 			]
 		}
 	]
