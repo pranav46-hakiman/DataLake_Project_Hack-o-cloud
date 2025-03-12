@@ -1,5 +1,5 @@
 {
-	"name": "BlobtoBlob",
+	"name": "BlobtoBlobPaysim",
 	"properties": {
 		"activities": [
 			{
@@ -44,7 +44,7 @@
 							{
 								"source": {
 									"name": "step",
-									"type": "Int32",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
@@ -68,7 +68,7 @@
 							{
 								"source": {
 									"name": "amount",
-									"type": "Decimal",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
@@ -92,7 +92,7 @@
 							{
 								"source": {
 									"name": "oldbalanceOrg",
-									"type": "Decimal",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
@@ -104,7 +104,7 @@
 							{
 								"source": {
 									"name": "newbalanceOrig",
-									"type": "Decimal",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
@@ -128,7 +128,7 @@
 							{
 								"source": {
 									"name": "oldbalanceDest",
-									"type": "Decimal",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
@@ -140,7 +140,7 @@
 							{
 								"source": {
 									"name": "newbalanceDest",
-									"type": "Decimal",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
@@ -152,7 +152,7 @@
 							{
 								"source": {
 									"name": "isFraud",
-									"type": "Boolean",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
@@ -164,7 +164,7 @@
 							{
 								"source": {
 									"name": "isFlaggedFraud",
-									"type": "Boolean",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
