@@ -1,0 +1,76 @@
+{
+	"name": "DFPaysim",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DestinationPaysim",
+						"type": "DatasetReference"
+					},
+					"name": "Paysim"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "BatchDataFlow",
+						"type": "DatasetReference"
+					},
+					"name": "PaysimSQL"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          step as integer,",
+				"          type as string,",
+				"          amount as double,",
+				"          nameOrig as string,",
+				"          oldbalanceOrg as double,",
+				"          newbalanceOrig as double,",
+				"          nameDest as string,",
+				"          oldbalanceDest as double,",
+				"          newbalanceDest as double,",
+				"          isFlaggedFraud as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> Paysim",
+				"Paysim sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Transaction_ID as string,",
+				"          Date_Type as date,",
+				"          Day_of_Week as string,",
+				"          Time_of as integer,",
+				"          Type_of_Card as string,",
+				"          Entry_Mode as string,",
+				"          Amount as double,",
+				"          Type_of_Transaction as string,",
+				"          Merchant_Group as string,",
+				"          Country_of_Transaction as string,",
+				"          Shipping_Address as string,",
+				"          Country_of_Residence as string,",
+				"          Gender as string,",
+				"          Age as double,",
+				"          Bank as string,",
+				"          Fraud as boolean",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Amount = amount",
+				"     )) ~> PaysimSQL"
+			]
+		}
+	}
+}
