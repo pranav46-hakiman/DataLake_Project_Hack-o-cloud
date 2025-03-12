@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DFCreditCard",
+				"name": "CreditCard",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
