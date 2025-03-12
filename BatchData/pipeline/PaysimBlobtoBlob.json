@@ -195,6 +195,9 @@
 				]
 			}
 		],
+		"folder": {
+			"name": "BlobtoBlob"
+		},
 		"annotations": []
 	}
 }

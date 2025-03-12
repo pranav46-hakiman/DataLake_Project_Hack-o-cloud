@@ -1,0 +1,84 @@
+{
+	"name": "CreditCardDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HakimanDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Transaction_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Date_Type",
+				"type": "date"
+			},
+			{
+				"name": "Day_of_Week",
+				"type": "varchar"
+			},
+			{
+				"name": "Time_of",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Type_of_Card",
+				"type": "varchar"
+			},
+			{
+				"name": "Entry_Mode",
+				"type": "varchar"
+			},
+			{
+				"name": "Amount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Type_of_Transaction",
+				"type": "varchar"
+			},
+			{
+				"name": "Merchant_Group",
+				"type": "varchar"
+			},
+			{
+				"name": "Country_of_Transaction",
+				"type": "varchar"
+			},
+			{
+				"name": "Shipping_Address",
+				"type": "varchar"
+			},
+			{
+				"name": "Country_of_Residence",
+				"type": "varchar"
+			},
+			{
+				"name": "Gender",
+				"type": "varchar"
+			},
+			{
+				"name": "Age",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Bank",
+				"type": "varchar"
+			},
+			{
+				"name": "Fraud",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Creditcard"
+		}
+	}
+}

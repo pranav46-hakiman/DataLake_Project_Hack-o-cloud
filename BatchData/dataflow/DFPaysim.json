@@ -14,10 +14,6 @@
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "PaysimDS",
-						"type": "DatasetReference"
-					},
 					"name": "PaysimSQL"
 				}
 			],
@@ -41,26 +37,8 @@
 				"     ignoreNoFilesFound: false) ~> Paysim",
 				"Paysim sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          step as integer,",
-				"          type as string,",
-				"          amount as double,",
-				"          nameOrig as string,",
-				"          oldbalanceOrig as double,",
-				"          newbalanceOrig as double,",
-				"          nameDest as string,",
-				"          oldbalanceDest as double,",
-				"          newbalanceDest as double,",
-				"          isFlaggedFraud as boolean",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          step,",
 				"          type,",
