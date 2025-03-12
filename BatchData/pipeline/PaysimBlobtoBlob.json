@@ -1,0 +1,200 @@
+{
+	"name": "PaysimBlobtoBlob",
+	"properties": {
+		"activities": [
+			{
+				"name": "Paysim",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "step",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "step",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "type",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "type",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "amount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "amount",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "nameOrig",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nameOrig",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "oldbalanceOrg",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "oldbalanceOrg",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "newbalanceOrig",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "newbalanceOrig",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "nameDest",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nameDest",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "oldbalanceDest",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "oldbalanceDest",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "newbalanceDest",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "newbalanceDest",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "isFraud",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "isFraud",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "isFlaggedFraud",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "isFlaggedFraud",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourcePaysim",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationPaysim",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

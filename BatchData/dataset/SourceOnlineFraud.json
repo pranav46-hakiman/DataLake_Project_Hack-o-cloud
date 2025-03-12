@@ -1,0 +1,71 @@
+{
+	"name": "SourceOnlineFraud",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "OnineFraudSource",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BlobtoBlob"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "onlinefraud.csv",
+				"container": "source"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "step",
+				"type": "String"
+			},
+			{
+				"name": "type",
+				"type": "String"
+			},
+			{
+				"name": "amount",
+				"type": "String"
+			},
+			{
+				"name": "nameOrig",
+				"type": "String"
+			},
+			{
+				"name": "oldbalanceOrg",
+				"type": "String"
+			},
+			{
+				"name": "newbalanceOrig",
+				"type": "String"
+			},
+			{
+				"name": "nameDest",
+				"type": "String"
+			},
+			{
+				"name": "oldbalanceDest",
+				"type": "String"
+			},
+			{
+				"name": "newbalanceDest",
+				"type": "String"
+			},
+			{
+				"name": "isFraud",
+				"type": "String"
+			},
+			{
+				"name": "isFlaggedFraud",
+				"type": "String"
+			}
+		]
+	}
+}
