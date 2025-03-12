@@ -1,0 +1,43 @@
+{
+	"name": "DFCreditCard",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DestinationCreditCard",
+						"type": "DatasetReference"
+					},
+					"name": "Creditcard"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          Transaction_ID as string,",
+				"          Date_Type as date,",
+				"          Day_of_Week as string,",
+				"          Time_of as string,",
+				"          Type_of_Card as string,",
+				"          Entry_Mode as string,",
+				"          Amount as string,",
+				"          Type_of_Transaction as string,",
+				"          Merchant_Group as string,",
+				"          Country_of_Transaction as string,",
+				"          Shipping_Address as string,",
+				"          Country_of_Residence as string,",
+				"          Gender as string,",
+				"          Age as double,",
+				"          Bank as string,",
+				"          Fraud as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> Creditcard"
+			]
+		}
+	}
+}
