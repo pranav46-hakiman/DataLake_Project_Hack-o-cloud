@@ -1,0 +1,46 @@
+{
+	"name": "DFOnlineFraud",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DestinationOnlineFraud",
+						"type": "DatasetReference"
+					},
+					"name": "OnlineFraud"
+				}
+			],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          step as boolean,",
+				"          type as string,",
+				"          amount as double,",
+				"          nameOrig as string,",
+				"          oldbalanceOrg as double,",
+				"          newbalanceOrig as double,",
+				"          nameDest as string,",
+				"          oldbalanceDest as double,",
+				"          newbalanceDest as double,",
+				"          isFraud as boolean,",
+				"          isFlaggedFraud as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> OnlineFraud",
+				"OnlineFraud sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}
