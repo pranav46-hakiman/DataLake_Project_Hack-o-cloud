@@ -14,13 +14,17 @@
 			],
 			"sinks": [
 				{
-					"name": "sink1"
+					"dataset": {
+						"referenceName": "OnlineFraudDS",
+						"type": "DatasetReference"
+					},
+					"name": "OFDest"
 				}
 			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          step as boolean,",
+				"          step as integer,",
 				"          type as string,",
 				"          amount as double,",
 				"          nameOrig as string,",
@@ -29,8 +33,8 @@
 				"          nameDest as string,",
 				"          oldbalanceDest as double,",
 				"          newbalanceDest as double,",
-				"          isFraud as boolean,",
-				"          isFlaggedFraud as boolean",
+				"          isFraud as integer,",
+				"          isFlaggedFraud as integer",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -38,8 +42,37 @@
 				"     ignoreNoFilesFound: false) ~> OnlineFraud",
 				"OnlineFraud sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          step as integer,",
+				"          type as string,",
+				"          amount as double,",
+				"          nameOrig as string,",
+				"          oldbalanceOrg as double,",
+				"          newbalanceOrig as double,",
+				"          nameDest as string,",
+				"          oldbalanceDest as double,",
+				"          newbalanceDest as double,",
+				"          isFraud as integer,",
+				"          isFlaggedFraud as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          type,",
+				"          amount,",
+				"          nameOrig,",
+				"          oldbalanceOrg,",
+				"          newbalanceOrig,",
+				"          nameDest,",
+				"          oldbalanceDest,",
+				"          newbalanceDest",
+				"     )) ~> OFDest"
 			]
 		}
 	}

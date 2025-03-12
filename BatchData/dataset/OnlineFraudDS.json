@@ -1,0 +1,69 @@
+{
+	"name": "OnlineFraudDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HakimanDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "step",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "type",
+				"type": "varchar"
+			},
+			{
+				"name": "amount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "nameOrig",
+				"type": "varchar"
+			},
+			{
+				"name": "oldbalanceOrg",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "newbalanceOrig",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "nameDest",
+				"type": "varchar"
+			},
+			{
+				"name": "oldbalanceDest",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "newbalanceDest",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "isFraud",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "isFlaggedFraud",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "OnlineFraud"
+		}
+	}
+}
