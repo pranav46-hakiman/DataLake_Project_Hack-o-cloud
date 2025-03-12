@@ -1,5 +1,5 @@
 {
-	"name": "CreditCard",
+	"name": "SourceCreditCard",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SourceCreditCard",
