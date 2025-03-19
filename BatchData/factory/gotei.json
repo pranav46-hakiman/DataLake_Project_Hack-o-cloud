@@ -1,9 +1,0 @@
-{
-	"name": "gotei",
-	"location": "centralindia",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "fb4579f5-beeb-4dd2-9b6e-46cc68648729",
-		"tenantId": "a7f6cd16-0717-440d-b524-defcbe69ae7c"
-	}
-}
